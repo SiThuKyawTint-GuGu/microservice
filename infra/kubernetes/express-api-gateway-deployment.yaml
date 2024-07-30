@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-api-gateway
+  labels:
+    name: express-api-gateway
+    app: nodejs-microservice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: express-api-gateway
+      app: nodejs-microservice-app
+  template:
+    metadata:
+      labels:
+        name: express-api-gateway
+        app: nodejs-microservice-app
+    spec:
+      containers:
+        - name: express-api-gateway
+          image: docker.io/guguskyler/api-gateway:latest
+          ports:
+            - containerPort: 8000
+

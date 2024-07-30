@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-api-gateway
+  labels:
+    name: nginx-api-gateway
+    app: nodejs-microservice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: nginx-api-gateway
+      app: nodejs-microservice-app
+  template:
+    metadata:
+      labels:
+        name: nginx-api-gateway
+        app: nodejs-microservice-app
+    spec:
+      containers:
+        - name: nginx
+          image: docker.io/guguskyler/nginx-app:latest
+          ports:
+            - containerPort: 80

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+  labels:
+    name: product-service
+    app: nodejs-microservice-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8002
+      targetPort: 8002
+  selector:
+    name: product-app-pod
+    app: nodejs-microservice-app

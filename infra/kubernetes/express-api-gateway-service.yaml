@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: express-api-gateway-service
+  labels:
+    app: nodejs-microservice-app
+spec:
+  ports:
+    - port: 80
+      targetPort: 8000
+  selector:
+    name: express-api-gateway-pod
+    app: nodejs-microservice-app

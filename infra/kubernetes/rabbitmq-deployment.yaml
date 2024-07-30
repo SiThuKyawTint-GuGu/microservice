@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deploy
+  labels:
+    name: rabbitmq-deploy
+    app: nodejs-microservice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: rabbitmq-pod
+      app: nodejs-microservice-app
+    
+  template:
+    metadata:
+      name: rabbitmq-pod
+      labels:
+        name: rabbitmq-pod
+        app: nodejs-microservice-app
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3-management
+          ports:
+             - containerPort: 5672
+              
+    

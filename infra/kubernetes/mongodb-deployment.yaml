@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deploy
+  labels:
+    name: mongodb-deploy
+    app: nodejs-microservice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mongodb-pod
+      app: nodejs-microservice-app
+  template:
+    metadata:
+      name: mongodb-pod
+      labels:
+        name: mongodb-pod
+        app: nodejs-microservice-app
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "mongo"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "mongo"

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-app-deploy
+  labels:
+    name: customer-app-deploy
+    app: nodejs-microservice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: customer-app-pod
+      app: nodejs-microservice-app
+    
+  template:
+    metadata:
+      name: customer-app-pod
+      labels:
+        name: customer-app-pod
+        app: nodejs-microservice-app
+    spec:
+      containers:
+        - name: customer-app
+          image: docker.io/guguskyler/customer-app:latest
+          ports:
+            - containerPort: 8001
+          env:
+          - name: APP_SECRET
+            value: "jg_youtube_tutorial"
+          - name: MONGODB_URI
+            value: "mongodb://db/msytt_customer"
+          - name: MSG_QUEUE_URL
+            value: "amqp://rabbitmq:5672"
+          - name: EXCHANGE_NAME
+            value: "ONLINE_STORE"
+          - name: PORT
+            value: "8001"
+    
